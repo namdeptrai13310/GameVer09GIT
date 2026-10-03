@@ -1,4 +1,5 @@
 using UnityEngine;
+using HorrorGame.Story;
 
 public class RespawnManager : MonoBehaviour
 {
@@ -15,7 +16,13 @@ public class RespawnManager : MonoBehaviour
 
     void Start()
     {
-        // Vừa vào game là tự động bế nhân vật quăng về đúng chỗ SpawnPoint
+        // Nếu đang có cutscene mở đầu thì không respawn
+        // vì CinematicIntroManager sẽ tự đặt vị trí nhân vật bên cạnh xe
+        var introManager = FindAnyObjectByType<HorrorGame.Story.CinematicIntroManager>();
+        if (introManager != null && introManager.gameObject.activeInHierarchy)
+        {
+            return; // Cutscene intro sẽ tự xử lý vị trí player
+        }
         RespawnPlayer();
     }
 

@@ -76,6 +76,8 @@ namespace FpsHorrorKit
 
         private IEnumerator MovePlayerSmoothly(Transform targetTransform, float duration)
         {
+            if (playerTransform == null || targetTransform == null) yield break;
+
             Vector3 startPosition = playerTransform.position;
             Quaternion startRotation = playerTransform.rotation;
             float elapsedTime = 0f;

@@ -83,8 +83,11 @@ namespace FpsHorrorKit
                 _input.move = Vector2.zero;
                 velocity = Vector3.zero;
 
-                headBob.AmplitudeGain = idleBobAmp;
-                headBob.FrequencyGain = idleBobFreq;
+                if (headBob != null)
+                {
+                    headBob.AmplitudeGain = idleBobAmp;
+                    headBob.FrequencyGain = idleBobFreq;
+                }
                 return;
             }
 
@@ -160,6 +163,8 @@ namespace FpsHorrorKit
 
         private void HeadBob()
         {
+            if (headBob == null) return;
+
             float moveMagnitude = _input.move.magnitude; // Hareket miktarını hesapla
             float targetAmp = moveMagnitude > 0 ? (_input.sprint ? sprintBobAmp : walkBobAmp) : idleBobAmp;
             float targetFreq = moveMagnitude > 0 ? (_input.sprint ? sprintBobFreq : walkBobFreq) : idleBobFreq;

@@ -34,7 +34,9 @@ namespace FpsHorrorKit
         void Start()
         {
             _collider = GetComponent<Collider>();
-            player = GameObject.FindGameObjectWithTag("Player").transform;
+            var playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null) player = playerObj.transform;
+            else Debug.LogWarning("[DragToOpenSystem] Không tìm thấy object tag 'Player'!");
 
             initialAngle = transform.localEulerAngles.y;
 

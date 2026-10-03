@@ -103,10 +103,18 @@ namespace FpsHorrorKit
 
         private IEnumerator SmoothTransition(Vector3 targetPosition, Quaternion targetRotation, bool disableCollider)
         {
-            while (Vector3.Distance(transform.position, targetPosition) > 0.01f || Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+            float elapsed = 0f;
+            float duration = 0.5f; // Tối đa 0.5s để tới đích
+
+            Vector3 startPos = transform.position;
+            Quaternion startRot = transform.rotation;
+
+            while (elapsed < duration)
             {
-                transform.position = Vector3.Lerp(transform.position, targetPosition, returnSpeed * Time.deltaTime);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, returnSpeed * Time.deltaTime);
+                float t = elapsed / duration;
+                transform.position = Vector3.Lerp(startPos, targetPosition, t);
+                transform.rotation = Quaternion.Lerp(startRot, targetRotation, t);
+                elapsed += Time.deltaTime;
                 yield return null;
             }
 

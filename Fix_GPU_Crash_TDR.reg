@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+
+; Fix Unity GPU Timeout Detection and Recovery (TDR) Crash
+; Khac phuc loi "Failed to present D3D11 swapchain due to device reset/removed"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers]
+"TdrDelay"=dword:0000000a
+"TdrDdiDelay"=dword:0000000a
